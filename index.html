@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Currency Converter</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Glitter Background -->
+    <div class="glitter-container" id="glitterContainer"></div>
+
+    <!-- Top Controls -->
+    <div class="top-controls">
+
+        <button id="themeToggle" class="icon-button" title="Toggle dark mode">
+            🌙
+        </button>
+
+    </div>
+
+
+    <main class="main-container">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div class="logo">
+                💱
+            </div>
+
+            <div>
+                <h1>Currency Converter</h1>
+
+                <p>
+                    Convert currencies instantly with live exchange rates
+                </p>
+            </div>
+
+        </header>
+
+
+        <!-- Main Converter Card -->
+        <section class="converter-card">
+
+            <!-- Amount -->
+            <div class="input-section">
+
+                <label for="amount">
+                    💰 Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="amount"
+                    value="100"
+                    min="0"
+                    step="0.01"
+                    placeholder="Enter amount"
+                >
+
+            </div>
+
+
+            <!-- Quick Amounts -->
+            <div class="quick-section">
+
+                <span>Quick Amount:</span>
+
+                <button class="quick-btn" data-amount="100">
+                    100
+                </button>
+
+                <button class="quick-btn" data-amount="500">
+                    500
+                </button>
+
+                <button class="quick-btn" data-amount="1000">
+                    1K
+                </button>
+
+                <button class="quick-btn" data-amount="5000">
+                    5K
+                </button>
+
+                <button class="quick-btn" data-amount="10000">
+                    10K
+                </button>
+
+            </div>
+
+
+            <!-- Currency Selection -->
+            <div class="currency-section">
+
+
+                <!-- FROM -->
+                <div class="currency-box">
+
+                    <label for="fromCurrency">
+                        From
+                    </label>
+
+                    <select id="fromCurrency">
+
+                        <option value="USD">
+                            🇺🇸 USD - US Dollar
+                        </option>
+
+                        <option value="INR">
+                            🇮🇳 INR - Indian Rupee
+                        </option>
+
+                        <option value="EUR">
+                            🇪🇺 EUR - Euro
+                        </option>
+
+                        <option value="GBP">
+                            🇬🇧 GBP - British Pound
+                        </option>
+
+                        <option value="JPY">
+                            🇯🇵 JPY - Japanese Yen
+                        </option>
+
+                        <option value="AUD">
+                            🇦🇺 AUD - Australian Dollar
+                        </option>
+
+                        <option value="CAD">
+                            🇨🇦 CAD - Canadian Dollar
+                        </option>
+
+                        <option value="CHF">
+                            🇨🇭 CHF - Swiss Franc
+                        </option>
+
+                        <option value="CNY">
+                            🇨🇳 CNY - Chinese Yuan
+                        </option>
+
+                        <option value="SGD">
+                            🇸🇬 SGD - Singapore Dollar
+                        </option>
+
+                        <option value="AED">
+                            🇦🇪 AED - UAE Dirham
+                        </option>
+
+                        <option value="NZD">
+                            🇳🇿 NZD - New Zealand Dollar
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SWAP -->
+                <button
+                    id="swap"
+                    class="swap-button"
+                    title="Swap currencies"
+                >
+                    ⇄
+                </button>
+
+
+                <!-- TO -->
+                <div class="currency-box">
+
+                    <label for="toCurrency">
+                        To
+                    </label>
+
+                    <select id="toCurrency">
+
+                        <option value="INR">
+                            🇮🇳 INR - Indian Rupee
+                        </option>
+
+                        <option value="USD">
+                            🇺🇸 USD - US Dollar
+                        </option>
+
+                        <option value="EUR">
+                            🇪🇺 EUR - Euro
+                        </option>
+
+                        <option value="GBP">
+                            🇬🇧 GBP - British Pound
+                        </option>
+
+                        <option value="JPY">
+                            🇯🇵 JPY - Japanese Yen
+                        </option>
+
+                        <option value="AUD">
+                            🇦🇺 AUD - Australian Dollar
+                        </option>
+
+                        <option value="CAD">
+                            🇨🇦 CAD - Canadian Dollar
+                        </option>
+
+                        <option value="CHF">
+                            🇨🇭 CHF - Swiss Franc
+                        </option>
+
+                        <option value="CNY">
+                            🇨🇳 CNY - Chinese Yuan
+                        </option>
+
+                        <option value="SGD">
+                            🇸🇬 SGD - Singapore Dollar
+                        </option>
+
+                        <option value="AED">
+                            🇦🇪 AED - UAE Dirham
+                        </option>
+
+                        <option value="NZD">
+                            🇳🇿 NZD - New Zealand Dollar
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Convert Button -->
+            <button id="convert" class="convert-button">
+
+                <span>✨ Convert Currency</span>
+
+            </button>
+
+
+            <!-- Result -->
+            <div id="result" class="result-box">
+
+                <div class="result-label">
+                    Converted Amount
+                </div>
+
+                <div id="convertedValue" class="converted-value">
+                    ₹0.00
+                </div>
+
+                <div id="conversionText" class="conversion-text">
+                    Enter an amount and click Convert
+                </div>
+
+                <div id="exchangeRate" class="exchange-rate">
+                </div>
+
+                <div id="updatedTime" class="updated-time">
+                </div>
+
+            </div>
+
+
+            <!-- Favorite -->
+            <button id="favoriteButton" class="favorite-button">
+
+                ☆ Add to Favorites
+
+            </button>
+
+        </section>
+
+
+        <!-- Information Cards -->
+        <div class="info-grid">
+
+
+            <!-- History -->
+            <section class="info-card">
+
+                <div class="section-title">
+
+                    <h2>
+                        📜 Recent Conversions
+                    </h2>
+
+                    <button id="clearHistory">
+                        Clear
+                    </button>
+
+                </div>
+
+                <div id="historyList" class="history-list">
+
+                    <p class="empty-message">
+                        No conversions yet
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Favorites -->
+            <section class="info-card">
+
+                <div class="section-title">
+
+                    <h2>
+                        ⭐ Favorites
+                    </h2>
+
+                </div>
+
+                <div id="favoritesList" class="favorites-list">
+
+                    <p class="empty-message">
+                        No favorite pairs yet
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- Chart -->
+        <section class="chart-card">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>
+                        📊 Exchange Rate History
+                    </h2>
+
+                    <p>
+                        Historical rate for the selected currencies
+                    </p>
+                </div>
+
+                <button id="loadChart">
+                    Load Chart
+                </button>
+
+            </div>
+
+            <div class="chart-container">
+
+                <canvas id="rateChart"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+
+            <p>
+                💜 Built with HTML, CSS & JavaScript
+            </p>
+
+            <p>
+                Live exchange rates powered by Frankfurter API
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
